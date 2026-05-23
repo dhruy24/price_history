@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id           String       @id @default(cuid())
+  url          String       @unique
+  name         String
+  imageUrl     String?
+  createdAt    DateTime     @default(now())
+  priceHistory PricePoint[]
+  alerts       Alert[]
+}
+
+model PricePoint {
+  id        String   @id @default(cuid())
+  productId String
+  price     Float
+  scrapedAt DateTime @default(now())
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+}
+
+model Alert {
+  id        String   @id @default(cuid())
+  productId String
+  email     String
+  threshold Float
+  direction String   @default("below") // "below" | "above"
+  triggered Boolean  @default(false)
+  createdAt DateTime @default(now())
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+}
