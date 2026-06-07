@@ -40,6 +40,10 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# GCP service account keys - never commit these
+gcp-key.json
+*.json.key
+
 # vercel
 .vercel
 

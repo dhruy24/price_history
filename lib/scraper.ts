@@ -46,7 +46,10 @@ function parsePrice(raw: string): { price: number | null; currency: string } {
 }
 
 export async function scrapeAmazonProduct(url: string): Promise<ScrapeResult> {
-  const browser = await chromium.launch({ headless: true });
+  const browser = await chromium.launch({
+    headless: true,
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  });
   try {
     const context = await browser.newContext({
       userAgent: randomUserAgent(),
