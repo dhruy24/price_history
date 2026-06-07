@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { addTrackedProduct } from "./RecentlyTracked";
 
 export default function UrlForm() {
   const router = useRouter();
@@ -27,6 +28,7 @@ export default function UrlForm() {
       }
 
       const product = await res.json();
+      addTrackedProduct(product.id);
       router.push(`/product/${product.id}`);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");
