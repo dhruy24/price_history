@@ -103,9 +103,9 @@ export default async function ProductPage({
               <h2 className="font-semibold text-gray-800 dark:text-gray-200 mb-3">Your alerts</h2>
               <ul className="divide-y divide-gray-100 dark:divide-gray-800">
                 {product.alerts.map((a) => (
-                  <li key={a.id} className="flex justify-between items-center py-2 text-sm">
-                    <span className="text-gray-600 dark:text-gray-400">{a.email}</span>
-                    <span className="flex items-center gap-2">
+                  <li key={a.id} className="flex justify-between items-center gap-2 py-2 text-sm min-w-0">
+                    <span className="text-gray-600 dark:text-gray-400 truncate min-w-0">{a.email}</span>
+                    <span className="flex items-center gap-2 shrink-0">
                       <span className="text-gray-500 dark:text-gray-400 text-xs capitalize">{a.direction}</span>
                       <span className="font-medium dark:text-gray-200">{currency}{a.threshold.toFixed(2)}</span>
                       {a.triggered ? (
